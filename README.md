@@ -3,7 +3,6 @@ Haskell Best Practices
 
 _(For Beginner-to-Intermediate Haskellians)_
 
-# What is this?
 Haskell is a very flexible language and as a result there are often many 
 different flavors of tools that cater to different ideologies or opinions. This 
 list is a collection of recommendations targeted to Haskell users who are in the 
@@ -11,7 +10,6 @@ slightly awkward position of knowing enough Haskell to use reasonably
 intermediate languages and libraries, but do not yet know enough to confidently 
 investigate and weigh the minutia of different options.
 
-# Contents
 * [HTTP Request Library](#http-request-library)
 * [JSON Serialization and Parsing](#json-serialization-and-parsing)
 * [Effects System](#effects-system)
