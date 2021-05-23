@@ -34,7 +34,7 @@ here with a user experience more suited to you.
 
 # HTTP Request Library
 
-## Req
+### Req
 Req and Wreq are batteries-included, easy-to-use request libraries that handle 
 the majority of use cases.
 
@@ -46,12 +46,12 @@ you will most likely also be using `aeson` and `lens-aeson`) go with `Wreq`.
 
 # JSON
 
-## aeson
+### aeson
 Parsing is one of Haskell's greatest strengths, and JSON is no exception.  
 `aeson` is the de-facto standard library for parsing JSON and can generically 
 serialize most data structures.
 
-## plus perhaps lens-aeson or microlens-aeson
+### plus perhaps lens-aeson or microlens-aeson
 If you are doing significant amounts of raw JSON traversal and parsing (in 
 contrast with simple serialization and deserialization where you know the 
 expected input/output) it is worth learning the basics about how to use lenses 
@@ -66,27 +66,27 @@ though `lens-aeson` does have more depth.
 
 # Effects System
 
-## None
+### None
 Effects systems only really become useful once applications reach a moderate 
 size and level of complexity. For smaller applications where most of the IO 
 logic can sit at the top level, it's more prudent to focus on simply decomposing 
 IO functions and refactoring to keep business logic out of IO.
 
-## Whatever your framework uses
+### Whatever your framework uses
 For example, if you're building a web API you may also be using a framework that 
 bundles an effects system. Needless to say, do not give yourself the headache of 
 trying to unify two effects systems.
 
-## Transformers
+### Transformers
 
-## Tagless-Final or RIO
+### Tagless-Final or RIO
 
 # Strings
 An oddity in Haskell is the three primary string types. `String` is the built-in 
 string type and is a simple list of ASCII characters. However, it's not 
 particularly performant and does not handle Unicode well.
 
-## Text
+### Text
 In most situations where you're dealing with a modest amount of text that is 
 intended to be read by a human, you want `Text`. `Text` has all of the utility 
 functions that work on `String` (and more), but is more performant and handles 
@@ -95,7 +95,7 @@ Unicode.
 For small applications, or applications that do minimal String processing 
 `String` will be fine.
 
-## ByteString
+### ByteString
 `ByteString` is an implementation of raw byte arrays, and therefore may be 
 arbitrary binary data. It is best used when you care about performance more than 
 whether it's human-readable, do not care about the abstraction around the 
@@ -112,7 +112,7 @@ and `megaparsec`. Similar to `lens` variants, the API and user experience of
 these three libraries are very similar, so understanding the basics of one will 
 translate well to another.
 
-## megaparsec
+### megaparsec
 `megaparsec` has all of the functionality of `parsec` and `attoparsec` but with 
 better error messages, and generally better user experience. As a tradeoff, 
 `attoparsec` is faster.
@@ -121,11 +121,11 @@ better error messages, and generally better user experience. As a tradeoff,
 This is another area where the general patterns and user experience of one tool 
 will generally apply to the others.
 
-## Streaming
+### Streaming
 The aptly-named `Streaming` package is aims to be the most simple streaming 
 library and builds off of existing base knowledge of List-like operations.
 
-## Conduit
+### Conduit
 The primary use case for `Conduit` is streams of raw data, though it can also be 
 used for reactive, event-oriented programming as well. It is part of a large 
 ecosystem of `Conduit`-oriented packages and is the most established, widely 
@@ -133,7 +133,7 @@ used option. `Conduit` also has packages for handling concurrent streams.
 
 # Command Line Arguments
 
-## optparse-applicative
+### optparse-applicative
 
 `optparse-applicative` is by far the de-facto standard for parsing command line 
 arguments with an easy to use API and automatically generated `--help` 
