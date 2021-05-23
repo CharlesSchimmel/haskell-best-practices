@@ -11,6 +11,16 @@ slightly awkward position of knowing enough Haskell to use reasonably
 intermediate languages and libraries, but do not yet know enough to confidently 
 investigate and weigh the minutia of different options.
 
+# Contents
+* [HTTP Request Library](#http-request-library)
+* [JSON Serialization and Parsing](#json-serialization-and-parsing)
+* [Effects System](#effects-system)
+* [Strings](#strings)
+* [Web Servers](#web-servers)
+* [General Parsing](#parsing)
+* [Streaming Libraries](#streaming-libraries)
+* [Command Line Arguments](#command-line-arguments)
+
 # HTTP Request Library
 
 ## Wreq or Req
@@ -45,8 +55,6 @@ go with `microlens-aeson`. They both meet the large majority of use-cases,
 though `lens-aeson` does have more depth.
 
 # Effects System
-
-## For Small Applications and Beginners
 
 ## None
 Effects systems only really become useful once applications reach a moderate 
