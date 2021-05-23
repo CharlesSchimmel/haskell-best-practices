@@ -32,18 +32,18 @@ bring it in. If you are familiar with lenses or will be parsing a lot of raw
 JSON (in which case you will most likely also be using aeson and lens-aeson) go 
 with Wreq.
 
-# JSON {de,}serialization and parsing
+# JSON Serialization and Parsing
 
 ## aeson
-Parsing is one of Haskell's greatest strengths, and JSON is no exception.  
+Parsing is one of Haskell's greatest strengths, and JSON is no exception. 
 `aeson` is the de-facto standard library for parsing JSON and can automatically 
 {de,}serialize most data structures.
 
 ## plus perhaps lens-aeson or microlens-aeson
 If you are doing significant amounts of raw JSON traversal and parsing (in 
 contrast with simple serialization and deserialization where you know the 
-expected inpu/output) it is worth learning the basics about how to use lenses 
-and lens-compatible libraries, and you will also likely want `lens-aeson' or 
+expected input/output) it is worth learning the basics about how to use lenses 
+and lens-compatible libraries, and you will also likely want `lens-aeson` or 
 `microlens-aeson`.
 
 Again, `lens` is a big library, so many people avoid depending on it unless they 
