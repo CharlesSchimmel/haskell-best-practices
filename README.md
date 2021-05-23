@@ -22,20 +22,19 @@ paralysis.
 
 # The Golden Rule
 
-In general if you need a library for some functionality, and another library 
-depends on a certain library for that functionality, you should consider using 
-that library unless you have specific requirements that it does not meet.  
-However, if you do not particularly care about your dependencies or executable 
-size, you might instead choose a tool listed here with a user experience more 
-suited to you.
-
-For example, if you are already using the `Conduit` ecosystem of libraries, it 
-will probably be easier to also use `xml-conduit` than another XML parsing 
-library.
+In general if you need a library for some functionality and a library you're 
+already using depends on a certain library for that functionality, you should 
+consider using that library unless you have specific requirements that it does 
+not meet. Or, you should consider a library within an ecosystem of libraries 
+that you are already using. For example, if you are already using the `Conduit` 
+ecosystem of libraries, it will probably be easier to also use `xml-conduit` 
+than another XML parsing library. However, if you do not particularly care about 
+your dependencies or executable size, you might instead choose a tool listed 
+here with a user experience more suited to you.
 
 # HTTP Request Library
 
-## Wreq and Req
+## Req
 Req and Wreq are batteries-included, easy-to-use request libraries that handle 
 the majority of use cases.
 
@@ -76,14 +75,13 @@ IO functions and refactoring to keep business logic out of IO.
 ## Whatever your framework uses
 For example, if you're building a web API you may also be using a framework that 
 bundles an effects system. Needless to say, do not give yourself the headache of 
-trying to manage two effects systems.
+trying to unify two effects systems.
 
 ## Transformers
 
 ## Tagless-Final or RIO
 
 # Strings
-
 An oddity in Haskell is the three primary string types. `String` is the built-in 
 string type and is a simple list of ASCII characters. However, it's not 
 particularly performant and does not handle Unicode well.
@@ -102,9 +100,9 @@ For small applications, or applications that do minimal String processing
 arbitrary binary data. It is best used when you care about performance more than 
 whether it's human-readable, do not care about the abstraction around the 
 representation of whatever data it represents, or need to work with raw bytes.  
-As an array of Word8 byets, `ByteString` does not handle Unicode or any text 
-encoding at all. `ByteString` also enables more control over the memory use of 
-data and is useful when dealing with large 
+As an array of Word8 bytes, `ByteString` does not care about the encoding of its 
+contents. `ByteString` also enables more control over the memory use of data and 
+is useful when dealing with large 
 
 # Web Servers
 
@@ -119,10 +117,22 @@ translate well to another.
 better error messages, and generally better user experience. As a tradeoff, 
 `attoparsec` is faster.
 
-# Streaming Libraries
-Conduit, Streaming, and Pipes
+# Streaming
+This is another area where the general patterns and user experience of one tool 
+will generally apply to the others.
+
+## Streaming
+The aptly-named `Streaming` package is aims to be the most simple streaming 
+library and builds off of existing base knowledge of List-like operations.
+
+## Conduit
+The primary use case for `Conduit` is streams of raw data, though it can also be 
+used for reactive, event-oriented programming as well. It is part of a large 
+ecosystem of `Conduit`-oriented packages and is the most established, widely 
+used option. `Conduit` also has packages for handling concurrent streams.
 
 # Command Line Arguments
+
 ## optparse-applicative
 
 `optparse-applicative` is by far the de-facto standard for parsing command line 
