@@ -1,14 +1,15 @@
 Haskell Best Practices
 ======================
 
-_(For Beginner-to-Intermediate Haskellians)_
+_For Beginner-to-Intermediate Haskellians_
 
-Haskell is a very flexible language and as a result there are often many 
-different flavors of tools that cater to different ideologies or opinions. This 
-list is a collection of recommendations targeted to Haskell users who are in the 
-slightly awkward position of knowing enough Haskell to use reasonably 
-intermediate languages and libraries, but do not yet know enough to confidently 
-investigate and weigh the minutia of different options.
+Haskell is a very flexible language and as a result there is an abundance of 
+tools often with subtley different tradeoffs, workflows, or opinions. This list 
+is a collection of recommendations targeted to Haskell users who are in the 
+awkward stage of knowing enough Haskell to use reasonably intermediate languages 
+and libraries, but do not yet feel condfident to investigate and weigh the 
+minutia of different options. This is a list of "safe bets" to avoid analysis 
+paralysis.
 
 * [HTTP Request Library](#http-request-library)
 * [JSON Serialization and Parsing](#json-serialization-and-parsing)
@@ -19,25 +20,37 @@ investigate and weigh the minutia of different options.
 * [Streaming Libraries](#streaming-libraries)
 * [Command Line Arguments](#command-line-arguments)
 
+# The Golden Rule
+
+In general if you need a library for some functionality, and another library 
+depends on a certain library for that functionality, you should consider using 
+that library unless you have specific requirements that it does not meet.  
+However, if you do not particularly care about your dependencies or executable 
+size, you might instead choose a tool listed here with a user experience more 
+suited to you.
+
+For example, if you are already using the `Conduit` ecosystem of libraries, it 
+will probably be easier to also use `xml-conduit` than another XML parsing 
+library.
+
 # HTTP Request Library
 
-## Wreq or Req
-Req and Wreq are more or less the de-facto, easy-to-use request libraries. They 
-handle all common HTTP-related tasks, and are very easy to get started with.
+## Wreq and Req
+Req and Wreq are batteries-included, easy-to-use request libraries that handle 
+the majority of use cases.
 
-Wreq is very similar to Req, except that it also provides lens-based API for 
-ease of use, and therefore also depends on the `lens` library. If you are 
-unfamiliar with lenses, go with Req; it's a big library and there's no need to 
-bring it in. If you are familiar with lenses or will be parsing a lot of raw 
-JSON (in which case you will most likely also be using aeson and lens-aeson) go 
-with Wreq.
+Wreq is a derivative of `Req`, and also provides lens-based API for ease of use, 
+and therefore also depends on the `lens` library. If you are unfamiliar with 
+lenses, go with `Req`; it's a big library and there's no need to bring it in. If 
+you are familiar with lenses or will be parsing a lot of raw JSON (in which case 
+you will most likely also be using `aeson` and `lens-aeson`) go with `Wreq`.
 
-# JSON Serialization and Parsing
+# JSON
 
 ## aeson
-Parsing is one of Haskell's greatest strengths, and JSON is no exception. 
-`aeson` is the de-facto standard library for parsing JSON and can automatically 
-{de,}serialize most data structures.
+Parsing is one of Haskell's greatest strengths, and JSON is no exception.  
+`aeson` is the de-facto standard library for parsing JSON and can generically 
+serialize most data structures.
 
 ## plus perhaps lens-aeson or microlens-aeson
 If you are doing significant amounts of raw JSON traversal and parsing (in 
@@ -65,32 +78,53 @@ For example, if you're building a web API you may also be using a framework that
 bundles an effects system. Needless to say, do not give yourself the headache of 
 trying to manage two effects systems.
 
+## Transformers
+
 ## Tagless-Final or RIO
 
 # Strings
 
-## Why are there 3 String Types?
-String is a simple list of ASCII characters and is built into the GHC as the 
-standard text type. However, it's not particularly performantG
+An oddity in Haskell is the three primary string types. `String` is the built-in 
+string type and is a simple list of ASCII characters. However, it's not 
+particularly performant and does not handle Unicode well.
 
-## When to use String
-If you're doing a small amount of basic string reading and writing, `String` 
-will be fine.
-
-## When to use Text
+## Text
 In most situations where you're dealing with a modest amount of text that is 
-intended to be read by a human, you want Data.Text. Data.Text has all of the 
-utility functions that work on String (and more), but is more performant.
+intended to be read by a human, you want `Text`. `Text` has all of the utility 
+functions that work on `String` (and more), but is more performant and handles 
+Unicode.
 
-## When to use ByteString
-ByteString is a collection of raw bytes and may or may not represent 
-human-readable text. It is best used when you do not care whether it's 
-human-readable, do not care about the abstraction around the representation of 
-whatever data it represents, or need to parse raw bytes. It could be UTC-8, 
-ASCII, or whatever.
+For small applications, or applications that do minimal String processing 
+`String` will be fine.
+
+## ByteString
+`ByteString` is an implementation of raw byte arrays, and therefore may be 
+arbitrary binary data. It is best used when you care about performance more than 
+whether it's human-readable, do not care about the abstraction around the 
+representation of whatever data it represents, or need to work with raw bytes.  
+As an array of Word8 byets, `ByteString` does not handle Unicode or any text 
+encoding at all. `ByteString` also enables more control over the memory use of 
+data and is useful when dealing with large 
 
 # Web Servers
 
 # Parsing
+The major libraries in this space are `parsec` and its derivatives `attoparsec` 
+and `megaparsec`. Similar to `lens` variants, the API and user experience of 
+these three libraries are very similar, so understanding the basics of one will 
+translate well to another.
+
+## megaparsec
+`megaparsec` has all of the functionality of `parsec` and `attoparsec` but with 
+better error messages, and generally better user experience. As a tradeoff, 
+`attoparsec` is faster.
 
 # Streaming Libraries
+Conduit, Streaming, and Pipes
+
+# Command Line Arguments
+## optparse-applicative
+
+`optparse-applicative` is by far the de-facto standard for parsing command line 
+arguments with an easy to use API and automatically generated `--help` 
+documentation.
